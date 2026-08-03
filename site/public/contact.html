@@ -47,9 +47,9 @@
 <style>
         /* Custom Styles & Utilities */
         body {
-            background-color: theme('colors.background');
-            color: theme('colors.text-primary');
-            font-family: theme('fontFamily.body');
+            background-color: #0A0E14;
+            color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -72,14 +72,14 @@
 
         /* Input styling overrides */
         input[type="text"], input[type="email"], textarea, select {
-            background-color: theme('colors.surface');
-            border-color: theme('colors.border');
-            color: theme('colors.text-primary');
+            background-color: #11161F;
+            border-color: #1E293B;
+            color: #F8FAFC;
         }
         
         input[type="text"]:focus, input[type="email"]:focus, textarea:focus, select:focus {
-            border-color: theme('colors.primary');
-            box-shadow: 0 0 0 1px theme('colors.primary');
+            border-color: #2DD4BF;
+            box-shadow: 0 0 0 1px #2DD4BF;
             outline: none;
         }
     </style>
@@ -90,12 +90,12 @@
 <!-- TopNavBar (Shared Component) -->
 <nav class="fixed top-0 w-full z-50 bg-[#0A0E14]/80 backdrop-blur-md border-b border-[#1E293B] shadow-2xl shadow-cyan-900/10 transition-all duration-300 ease-in-out">
 <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-<a class="text-xl font-headline font-bold text-[#F8FAFC] tracking-tighter active:scale-95 transition-transform" href="index.html">Said.dev</a>
+<a class="text-xl font-headline font-bold text-[#F8FAFC] tracking-tighter active:scale-95 transition-transform" href="index.html">Eng Said Abdihakim</a>
 <div class="hidden md:flex items-center gap-8 font-headline text-sm uppercase tracking-widest">
-<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors hover:bg-[#11161F] hover:text-[#2DD4BF] px-3 py-1 rounded" href="index.html">Home</a>
-<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors hover:bg-[#11161F] hover:text-[#2DD4BF] px-3 py-1 rounded" href="about.html">About</a>
-<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors hover:bg-[#11161F] hover:text-[#2DD4BF] px-3 py-1 rounded" href="projects.html">Projects</a>
-<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors hover:bg-[#11161F] hover:text-[#2DD4BF] px-3 py-1 rounded" href="skills.html">Skills</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF] transition-colors hover:bg-[#11161F] px-3 py-1 rounded" href="index.html">Home</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF] transition-colors hover:bg-[#11161F] px-3 py-1 rounded" href="about.html">About</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF] transition-colors hover:bg-[#11161F] px-3 py-1 rounded" href="projects.html">Projects</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF] transition-colors hover:bg-[#11161F] px-3 py-1 rounded" href="skills.html">Skills</a>
 <a aria-current="page" class="text-[#2DD4BF] border-b-2 border-[#2DD4BF] pb-1 px-3 rounded hover:bg-[#11161F] transition-colors" href="contact.html">Contact</a>
 </div>
 <a class="hidden md:block bg-primary/10 text-[#2DD4BF] px-6 py-2 rounded-md font-headline text-sm uppercase tracking-widest hover:bg-primary/20 transition-colors active:scale-95" href="contact.html">
@@ -121,14 +121,6 @@
 <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 <!-- Left Column: Context & Info -->
 <div class="space-y-10">
-<!-- Status Badge -->
-<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5">
-<span class="relative flex h-2.5 w-2.5">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
-</span>
-<span class="font-mono text-xs text-primary uppercase tracking-wider">Status: Open for Collaboration</span>
-</div>
 <div>
 <h1 class="font-display font-bold text-5xl md:text-6xl text-text-primary mb-6 tracking-tight leading-tight">
                         Let's build <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">something.</span>
@@ -165,8 +157,7 @@
 <div class="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-primary/20 rounded-tl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 <div class="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-primary/20 rounded-br-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 <div class="flex items-center gap-2 mb-8">
-<span class="material-symbols-outlined text-primary text-xl">terminal</span>
-<span class="font-mono text-sm text-text-secondary">~/contact/init_message.sh</span>
+<span class="font-mono text-sm text-text-secondary">Let's build something great together.</span>
 </div>
 <form class="space-y-6 relative z-10" onsubmit="event.preventDefault();">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -206,8 +197,8 @@
 </div>
 </main>
 <!-- Footer (Shared Component) -->
-<footer class="w-full py-12 bg-[#0A0E14] border-t border-[#1E293B] mt-auto">
-<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-6 opacity-80 hover:opacity-100 transition-opacity duration-300">
+<footer class="bg-[#0A0E14] w-full py-12 border-t border-[#1E293B]">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-6">
 <div class="font-headline font-bold text-[#F8FAFC]">
                 Eng Said Abdihakim
             </div>
@@ -215,10 +206,10 @@
                 © 2026 Eng Said Abdihakim. Built with precision.
             </div>
 <div class="flex gap-6 font-body text-xs text-[#94A3B8]">
-<a class="hover:text-[#2DD4BF] transition-colors" href="#">GitHub</a>
-<a class="hover:text-[#2DD4BF] transition-colors" href="#">LinkedIn</a>
-<a class="hover:text-[#2DD4BF] transition-colors" href="#">Twitter</a>
-<a class="hover:text-[#2DD4BF] transition-colors" href="#">Email</a>
+<a class="hover:text-[#2DD4BF] transition-colors opacity-80 hover:opacity-100 text-[#94A3B8]" href="#">GitHub</a>
+<a class="hover:text-[#2DD4BF] transition-colors opacity-80 hover:opacity-100 text-[#94A3B8]" href="#">LinkedIn</a>
+<a class="hover:text-[#2DD4BF] transition-colors opacity-80 hover:opacity-100 text-[#94A3B8]" href="#">Twitter</a>
+<a class="hover:text-[#2DD4BF] transition-colors opacity-80 hover:opacity-100 text-[#94A3B8]" href="#">Email</a>
 </div>
 </div>
 </footer>
