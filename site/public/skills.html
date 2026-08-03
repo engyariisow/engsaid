@@ -93,7 +93,7 @@
 </head>
 <body class="bg-background text-text-primary antialiased flex flex-col min-h-screen overflow-x-hidden">
 <!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#0A0E14]/80 backdrop-blur-md border-b border-[#1E293B] shadow-sm transition-all duration-300 ease-in-out">
+<nav class="fixed top-0 w-full z-50 bg-[#0A0E14]/80 backdrop-blur-md border-b border-[#1E293B] shadow-sm transition-all duration-300">
 <div class="max-w-[1100px] mx-auto flex justify-between items-center px-6 py-4">
 <div class="flex items-center gap-10 md:gap-0">
 <a class="text-xl font-headline font-bold text-[#F8FAFC] hover:scale-105 hover:text-[#2DD4BF] transition-all duration-300 truncate min-w-0" href="index.html">Eng Said Abdihakim</a>
@@ -373,4 +373,16 @@
 </div>
 </div>
 </footer>
+<script>
+        // Navbar scroll effect (nav stays fixed like home page)
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const nav = document.querySelector('nav');
+            if (scrolled > 50) {
+                nav.classList.add('bg-[#0A0E14]/95', 'shadow-xl');
+            } else {
+                nav.classList.remove('bg-[#0A0E14]/95', 'shadow-xl');
+            }
+        });
+    </script>
 </body></html>
