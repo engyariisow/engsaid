@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Said.dev | Eng Said Abdihakim - Web Developer Portfolio</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=JetBrains+Mono&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              background: "#0A0E14",
+              surface: "#11161F",
+              primary: "#2DD4BF",
+              secondary: "#38BDF8",
+              text: "#F8FAFC",
+              muted: "#94A3B8",
+              border: "#1E293B"
+            }
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            headline: ["Space Grotesk", "sans-serif"],
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    .glass-card {
+      background: rgba(17, 22, 31, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid #1E293B;
+    }
+
+    .hover-glow:hover {
+      box-shadow: 0 0 20px rgba(45, 212, 191, 0.4);
+      border-color: rgba(45, 212, 191, 0.6);
+      transform: translateY(-5px);
+    }
+
+    .tech-grid {
+      background-image: radial-gradient(circle at 2px 2px, #1E293B 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    .gradient-orb {
+      filter: blur(80px);
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+    .delay-400 { transition-delay: 400ms; }
+  </style>
+</head>
+<body class="bg-brand-background text-brand-text font-body selection:bg-brand-primary selection:text-brand-background">
+<!-- WebGL Background -->
+<div class="fixed inset-0 z-[-2] pointer-events-none opacity-50">
+<div class="fixed inset-0 w-full h-full">
+<canvas id="shader-canvas-ANIMATION_21" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_21');
+
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+varying vec2 v_texCoord;
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec2 center = uv - 0.5;
+    center.x *= u_resolution.x / u_resolution.y;
+    
+    float dist = length(center);
+    float glow = 0.05 / (dist + 0.5);
+    
+    float noise = sin(uv.x * 20.0 + u_time * 0.5) * cos(uv.y * 20.0 - u_time * 0.3);
+    noise = smoothstep(0.48, 0.52, noise * 0.1 + 0.5);
+    
+    vec3 accent = vec3(0.176, 0.831, 0.749);
+    vec3 bg = vec3(0.039, 0.055, 0.078);
+    
+    float pulse = sin(u_time * 0.2) * 0.5 + 0.5;
+    vec3 color = mix(bg, bg * 1.2, pulse);
+    color += accent * glow * 0.3;
+    color += accent * noise * 0.05;
+    
+    vec2 m = u_mouse / u_resolution;
+    float mDist = length(uv - m);
+    color += accent * (0.01 / (mDist + 0.1)) * 0.2;
+
+    gl_FragColor = vec4(color, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+</div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0A0E14]/80 backdrop-blur-md border-b border-[#1E293B] shadow-sm transition-all duration-300">
+<div class="max-w-[1100px] mx-auto flex justify-between items-center px-6 py-4">
+<a class="text-xl font-headline font-bold text-[#F8FAFC] hover:scale-105 hover:text-brand-primary transition-all duration-300" href="index.html">Said.dev</a>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center gap-8 font-headline text-sm font-bold uppercase tracking-wider">
+<a class="text-[#2DD4BF] border-b-2 border-[#2DD4BF] pb-1 hover:scale-105 transition-all duration-300" href="index.html">Home</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF] hover:scale-105 transition-all duration-300" href="about.html">About</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF] hover:scale-105 transition-all duration-300" href="projects.html">Projects</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF] hover:scale-105 transition-all duration-300" href="skills.html">Skills</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF] hover:scale-105 transition-all duration-300" href="contact.html">Contact</a>
+</div>
+<a class="hidden sm:inline-block bg-[#2DD4BF] text-[#0A0E14] px-6 py-2 rounded-lg font-headline font-bold text-xs uppercase tracking-widest active:scale-95 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(45,212,191,0.5)]" href="contact.html">
+        Hire Me
+      </a>
+<button class="md:hidden text-[#F8FAFC] p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Toggle menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="hidden md:hidden bg-[#0A0E14]/95 backdrop-blur-md border-b border-[#1E293B]" id="mobile-menu">
+<div class="px-6 py-4 flex flex-col gap-4 font-headline text-sm font-bold uppercase tracking-wider">
+<a class="text-[#2DD4BF]" href="index.html">Home</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="about.html">About</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="projects.html">Projects</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="skills.html">Skills</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="contact.html">Contact</a>
+<a class="bg-[#2DD4BF] text-[#0A0E14] text-center px-6 py-3 rounded-lg mt-2" href="contact.html">Hire Me</a>
+</div>
+</div>
+</nav>
+<main class="relative overflow-hidden pt-20">
+<!-- Background Decor -->
+<div class="absolute inset-0 tech-grid pointer-events-none"></div>
+<div class="absolute top-[10%] left-[10%] w-[400px] h-[400px] bg-brand-primary rounded-full gradient-orb"></div>
+<div class="absolute top-[40%] right-[5%] w-[300px] h-[300px] bg-brand-secondary rounded-full gradient-orb"></div>
+<!-- Hero Section -->
+<section class="animate-section max-w-[1100px] mx-auto px-6 pt-24 pb-20 md:pt-32 md:pb-32">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded bg-brand-surface border border-brand-border font-mono text-xs text-brand-primary animate-fade-up">
+<span class="opacity-50">~/said/about</span>
+<span class="w-2 h-4 bg-brand-primary animate-pulse"></span>
+</div>
+<h1 class="text-4xl sm:text-5xl md:text-7xl font-headline font-bold mb-4 tracking-tight animate-fade-up delay-100">
+          Eng Said Abdihakim
+        </h1>
+<h2 class="text-2xl md:text-3xl font-headline font-bold text-brand-secondary mb-6 animate-fade-up delay-200">
+          Web Developer &amp; Programmer
+        </h2>
+<p class="text-lg md:text-xl text-brand-muted mb-10 max-w-2xl leading-relaxed animate-fade-up delay-300">
+          Crafting high-performance web experiences with precision and modern technology. Specializing in scalable architecture and intuitive user interfaces.
+        </p>
+<div class="flex flex-wrap gap-4 animate-fade-up delay-400">
+<a class="px-8 py-4 bg-brand-primary text-brand-background font-headline font-bold rounded-lg shadow-[0_0_20px_rgba(45,212,191,0.3)] hover:scale-105 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(45,212,191,0.6)] transition-all duration-300" href="projects.html">
+            View My Work
+          </a>
+<a class="px-8 py-4 border border-brand-border text-brand-text font-headline font-bold rounded-lg hover:bg-brand-surface hover:scale-105 hover:-translate-y-1 hover:border-brand-primary/50 transition-all duration-300" href="contact.html">
+            Contact Me
+          </a>
+</div>
+</div>
+</section>
+<!-- Quick Stats Bar -->
+<section class="animate-section max-w-[1100px] mx-auto px-6 mb-32">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="glass-card p-6 rounded-xl hover-glow transition-all duration-500 delay-100">
+<div class="text-brand-primary text-3xl font-headline font-bold mb-1">5+</div>
+<div class="text-brand-muted text-sm uppercase tracking-wider font-bold">Years Experience</div>
+</div>
+<div class="glass-card p-6 rounded-xl hover-glow transition-all duration-500 delay-200">
+<div class="text-brand-secondary text-3xl font-headline font-bold mb-1">50+</div>
+<div class="text-brand-muted text-sm uppercase tracking-wider font-bold">Projects Shipped</div>
+</div>
+<div class="glass-card p-6 rounded-xl hover-glow transition-all duration-500 delay-300">
+<div class="text-brand-primary text-3xl font-headline font-bold mb-1">15+</div>
+<div class="text-brand-muted text-sm uppercase tracking-wider font-bold">Technologies</div>
+</div>
+<div class="glass-card p-6 rounded-xl hover-glow transition-all duration-500 delay-400 flex flex-col justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-brand-primary rounded-full animate-ping"></span>
+<span class="text-brand-primary text-lg font-headline font-bold">Available</span>
+</div>
+<div class="text-brand-muted text-sm uppercase tracking-wider font-bold">Open to work status</div>
+</div>
+</div>
+</section>
+<!-- Featured Projects -->
+<section class="animate-section max-w-[1100px] mx-auto px-6 mb-32">
+<div class="flex items-end justify-between mb-12">
+<div>
+<h2 class="text-4xl font-headline font-bold mb-4">Featured Projects</h2>
+<div class="w-20 h-1 bg-brand-primary"></div>
+</div>
+<a class="text-brand-muted hover:text-brand-primary transition-all duration-300 flex items-center gap-2 group hover:scale-105" href="projects.html">
+          See all projects
+          <span class="material-symbols-outlined group-hover:translate-x-1 group-hover:text-brand-primary transition-all">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Project 1 -->
+<div class="glass-card rounded-xl overflow-hidden hover-glow transition-all duration-700 delay-100 group cursor-pointer">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A sleek, modern administrative dashboard interface displayed on a high-resolution monitor. The UI features complex data visualizations, dark-mode color schemes with deep charcoal backgrounds, and vibrant teal accent charts. Professional soft studio lighting highlights the glossy screen in a minimalist tech office setting, emphasizing a clean and high-performance engineering aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj3LliaxS0Pj_LqThsd0VXCC7JRP2JWXefMXCIu3OeuO4H9LWHDg0sy_a9AWK_jPE0cMk8o1-5gj0dM-hexZLHTUnTS9Q6Unbafa3iJ6UM9HVIDjpu22Ul3Y5IP4oZVeybnNsfar1XnxXZJdVenlsOLmUExcInN_RB7gV0luhlY7Nzqq2chuVnafQSzCwtw3YYXybbjOmLPHWVyP-8OLeJeuHOJD9UZ1EMwDAJJXswdAnPs38o2Fi-UPA4t782rnzkjIvfxKqcoWxC"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-surface to-transparent opacity-60"></div>
+</div>
+<div class="p-6">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded border border-brand-primary/30 text-brand-primary bg-brand-primary/5">React</span>
+<span class="text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded border border-brand-secondary/30 text-brand-secondary bg-brand-secondary/5">Node.js</span>
+<span class="text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded border border-brand-muted/30 text-brand-muted bg-brand-muted/5">Tailwind</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-3 group-hover:text-brand-primary transition-colors">Enterprise Nexus Dash</h3>
+<p class="text-brand-muted text-sm mb-6 line-clamp-2">Real-time data synchronization engine for enterprise logistics management.</p>
+<a class="inline-flex items-center gap-2 text-brand-primary font-bold text-sm group-hover:scale-105 transition-transform" href="#">
+              View Project
+              <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="glass-card rounded-xl overflow-hidden hover-glow transition-all duration-700 delay-200 group cursor-pointer">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A futuristic mobile application interface for cryptocurrency trading, showcasing elegant glassmorphism effects and soft teal neon glowing borders. The screen displays flowing market trends and high-contrast typography in a dark environment. The overall mood is sophisticated and tech-forward, utilizing a palette of midnight blues and vibrant cyan highlights to represent modern financial technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6EVjPRgTOTwdkGaiW2_gb172Vvkj_Xg5B4q-dnHJhYc5tnEY5IUAj3Kw4VEMAyulVJ0g5xLp0FV4MD21xFMgtZdZc-02NytC7ZC8XYzrpEOaumfdGwug31VwHB8gdlajESUmzeimLtqKvWNtIPXUfcUV-HHLay6SZJcTHVaS8E6-VfKFocKK3Ypz3xAD55NP-5h067073I8zG1ktBoToUlkw0HTePXr4ZWH-nCBKrsay0sk20_PDnIxcnXOgP_jyedAVDJ7CVT2_H"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-surface to-transparent opacity-60"></div>
+</div>
+<div class="p-6">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded border border-brand-primary/30 text-brand-primary bg-brand-primary/5">Next.js</span>
+<span class="text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded border border-brand-secondary/30 text-brand-secondary bg-brand-secondary/5">Solidity</span>
+<span class="text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded border border-brand-muted/30 text-brand-muted bg-brand-muted/5">PostgreSQL</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-3 group-hover:text-brand-primary transition-colors">CryptoVault Terminal</h3>
+<p class="text-brand-muted text-sm mb-6 line-clamp-2">A high-security decentralized wallet with multi-chain aggregation features.</p>
+<a class="inline-flex items-center gap-2 text-brand-primary font-bold text-sm group-hover:scale-105 transition-transform" href="#">
+              View Project
+              <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Project 3 -->
+<div class="glass-card rounded-xl overflow-hidden hover-glow transition-all duration-700 delay-300 group cursor-pointer">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A conceptual 3D isometric representation of cloud infrastructure architecture. Floating servers and glowing data streams connect in a dark digital void, rendered with high-end octane style lighting. The color palette emphasizes deep blacks, bright teal lines of code, and sky-blue volumetric lighting. The image conveys speed, interconnectivity, and the robust nature of modern serverless backend systems." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2J_g2_nJMLxveUpeQCvYCHUWvaTNs3Yt3-5KoObmUlUjAvPiwqCBJaBWQOcSuSkpt1FrhQBojL7mVSACBy8JwwhlQLTQ7tCskueLdjR99WiXPrCddAMJpW9sH-d4eJrVuFfZTQNDquPZWYFVRxAvJMYLlcIfBnFY9VQpyNgr1yK8PRyirUcn9kvLsu5I2csy9GMEvS8Qgp4Uf7bLEZjEgaiIfeijtsyMs8Df2mkmntUWYm_c3iKX0lFmon6QupqY5J2T3NyVxtT5Z"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-surface to-transparent opacity-60"></div>
+</div>
+<div class="p-6">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded border border-brand-primary/30 text-brand-primary bg-brand-primary/5">AWS</span>
+<span class="text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded border border-brand-secondary/30 text-brand-secondary bg-brand-secondary/5">Docker</span>
+<span class="text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded border border-brand-muted/30 text-brand-muted bg-brand-muted/5">Go</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-3 group-hover:text-brand-primary transition-colors">SyncFlow API</h3>
+<p class="text-brand-muted text-sm mb-6 line-clamp-2">Microservices orchestrator for automated workflow processing at scale.</p>
+<a class="inline-flex items-center gap-2 text-brand-primary font-bold text-sm group-hover:scale-105 transition-transform" href="#">
+              View Project
+              <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills Teaser -->
+<section class="animate-section w-full py-16 bg-brand-surface/50 border-y border-brand-border overflow-hidden">
+<div class="flex whitespace-nowrap animate-marquee">
+<!-- Repeated items for infinite loop feel -->
+<div class="flex gap-8 items-center px-4 hover:pause">
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-primary transition-colors duration-300 hover:scale-110 cursor-default">TypeScript</span>
+<span class="w-2 h-2 rounded-full bg-brand-primary"></span>
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-secondary transition-colors duration-300 hover:scale-110 cursor-default">React</span>
+<span class="w-2 h-2 rounded-full bg-brand-secondary"></span>
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-primary transition-colors duration-300 hover:scale-110 cursor-default">Next.js</span>
+<span class="w-2 h-2 rounded-full bg-brand-primary"></span>
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-secondary transition-colors duration-300 hover:scale-110 cursor-default">PostgreSQL</span>
+<span class="w-2 h-2 rounded-full bg-brand-secondary"></span>
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-primary transition-colors duration-300 hover:scale-110 cursor-default">Docker</span>
+<span class="w-2 h-2 rounded-full bg-brand-primary"></span>
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-secondary transition-colors duration-300 hover:scale-110 cursor-default">AWS</span>
+<span class="w-2 h-2 rounded-full bg-brand-secondary"></span>
+<!-- Duplicate for seamless scroll -->
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-primary transition-colors duration-300 hover:scale-110 cursor-default">TypeScript</span>
+<span class="w-2 h-2 rounded-full bg-brand-primary"></span>
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-secondary transition-colors duration-300 hover:scale-110 cursor-default">React</span>
+<span class="w-2 h-2 rounded-full bg-brand-secondary"></span>
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-primary transition-colors duration-300 hover:scale-110 cursor-default">Next.js</span>
+<span class="w-2 h-2 rounded-full bg-brand-primary"></span>
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-secondary transition-colors duration-300 hover:scale-110 cursor-default">PostgreSQL</span>
+<span class="w-2 h-2 rounded-full bg-brand-secondary"></span>
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-primary transition-colors duration-300 hover:scale-110 cursor-default">Docker</span>
+<span class="w-2 h-2 rounded-full bg-brand-primary"></span>
+<span class="text-2xl font-headline font-bold text-brand-muted/40 hover:text-brand-secondary transition-colors duration-300 hover:scale-110 cursor-default">AWS</span>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="animate-section max-w-[1100px] mx-auto px-6 py-32 text-center">
+<div class="glass-card p-12 md:p-20 rounded-3xl relative overflow-hidden hover-glow transition-all duration-700">
+<div class="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-secondary/10 rounded-full blur-3xl"></div>
+<h2 class="text-4xl md:text-5xl font-headline font-bold mb-8 relative z-10">
+          Let's build something great together
+        </h2>
+<p class="text-xl text-brand-muted mb-10 max-w-xl mx-auto relative z-10">
+          Looking for a dedicated developer to bring your vision to life? I'm currently available for freelance projects and full-time opportunities.
+        </p>
+<button class="px-10 py-5 bg-brand-primary text-brand-background font-headline font-bold rounded-lg shadow-xl hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(45,212,191,0.6)] transition-all duration-300 relative z-10" onclick="location.href='contact.html'">
+          Get In Touch
+        </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="animate-section w-full py-12 bg-[#0A0E14] border-t border-[#1E293B]">
+<div class="max-w-[1100px] mx-auto flex flex-col md:flex-row justify-between items-center px-6">
+<div class="mb-6 md:mb-0">
+<div class="font-headline font-bold text-[#F8FAFC] text-lg mb-2 hover:text-brand-primary transition-colors cursor-pointer">Said.dev</div>
+<p class="font-body text-[#94A3B8] text-sm">© 2026 Eng Said Abdihakim. Built with precision.</p>
+</div>
+<div class="flex items-center gap-8">
+<a class="text-[#94A3B8] hover:text-[#38BDF8] hover:scale-110 hover:-translate-y-1 transition-all focus:ring-2 focus:ring-[#2DD4BF] flex items-center gap-2 text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-lg group-hover:animate-bounce">code</span> GitHub
+        </a>
+<a class="text-[#94A3B8] hover:text-[#38BDF8] hover:scale-110 hover:-translate-y-1 transition-all focus:ring-2 focus:ring-[#2DD4BF] flex items-center gap-2 text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-lg">link</span> LinkedIn
+        </a>
+<a class="text-[#94A3B8] hover:text-[#38BDF8] hover:scale-110 hover:-translate-y-1 transition-all focus:ring-2 focus:ring-[#2DD4BF] flex items-center gap-2 text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-lg">mail</span> Email
+        </a>
+</div>
+</div>
+</footer>
+<style>
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      animation: marquee 20s linear infinite;
+    }
+    .hover\:pause:hover {
+      animation-play-state: paused;
+    }
+  </style>
+<script>
+    // Simple micro-interaction for scroll effects
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const nav = document.querySelector('nav');
+      if (scrolled > 50) {
+        nav.classList.add('bg-[#0A0E14]/95', 'shadow-xl');
+      } else {
+        nav.classList.remove('bg-[#0A0E14]/95', 'shadow-xl');
+      }
+    });
+
+    // Reveal animations on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
+        }
+      });
+    }, observerOptions);
+
+    // Apply observers to all sections, cards, and text elements we want to animate
+    document.querySelectorAll('.glass-card, h1, h2, h3, p, .animate-fade-up, .animate-section').forEach(el => {
+      // Don't override elements that might have their own specific initial state in classes
+      if(!el.classList.contains('opacity-0')) {
+        el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+      }
+      observer.observe(el);
+    });
+  </script>
+</body></html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Projects - Eng Said Abdihakim Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#0A0E14",
+                        surface: "#11161F",
+                        primary: "#2DD4BF",
+                        secondary: "#38BDF8",
+                        textPrimary: "#F8FAFC",
+                        textSecondary: "#94A3B8",
+                        border: "#1E293B"
+                    },
+                    fontFamily: {
+                        headline: ["Space Grotesk", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.textPrimary');
+            font-family: theme('fontFamily.body');
+        }
+        
+        .glow-hover {
+            transition: all 0.3s ease;
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 30px rgba(45, 212, 191, 0.4);
+            border-color: rgba(45, 212, 191, 0.8);
+            transform: translateY(-4px);
+        }
+        
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .animate-fade-in-scale {
+            animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- Ambient Orbs -->
+<div class="ambient-orb bg-primary w-[500px] h-[500px] top-[-200px] left-[-200px]"></div>
+<div class="ambient-orb bg-secondary w-[400px] h-[400px] top-[40%] right-[-150px]"></div>
+<div class="ambient-orb bg-primary w-[600px] h-[600px] bottom-[-300px] left-[10%]"></div>
+<!-- TopNavBar -->
+<nav class="bg-[#0A0E14]/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-[#1E293B] shadow-2xl shadow-cyan-900/10">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-headline font-bold text-[#F8FAFC] tracking-tighter"><a href="index.html">Said.dev</a></div>
+<div class="hidden md:flex items-center gap-8 font-headline text-sm uppercase tracking-widest">
+<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors hover:bg-[#11161F] hover:text-[#2DD4BF] px-3 py-2 rounded-md transition-all duration-300 ease-in-out active:scale-95" href="index.html">Home</a>
+<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors hover:bg-[#11161F] hover:text-[#2DD4BF] px-3 py-2 rounded-md transition-all duration-300 ease-in-out active:scale-95" href="about.html">About</a>
+<a class="text-[#2DD4BF] border-b-2 border-[#2DD4BF] pb-1 px-3 py-2 rounded-md transition-all duration-300 ease-in-out active:scale-95" href="projects.html">Projects</a>
+<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors hover:bg-[#11161F] hover:text-[#2DD4BF] px-3 py-2 rounded-md transition-all duration-300 ease-in-out active:scale-95" href="skills.html">Skills</a>
+<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors hover:bg-[#11161F] hover:text-[#2DD4BF] px-3 py-2 rounded-md transition-all duration-300 ease-in-out active:scale-95" href="contact.html">Contact</a>
+</div>
+<a class="bg-primary text-background px-6 py-2 rounded-lg font-headline font-semibold text-sm hover:bg-opacity-90 transition-all duration-300 ease-in-out active:scale-95 hidden md:block" href="contact.html">
+                Hire Me
+            </a>
+<button class="md:hidden text-textPrimary" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Toggle menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="hidden md:hidden bg-[#0A0E14]/95 backdrop-blur-md border-b border-[#1E293B]" id="mobile-menu">
+<div class="px-6 py-4 flex flex-col gap-4 font-headline text-sm font-bold uppercase tracking-wider">
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="index.html">Home</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="about.html">About</a>
+<a class="text-[#2DD4BF]" href="projects.html">Projects</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="skills.html">Skills</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="contact.html">Contact</a>
+<a class="bg-[#2DD4BF] text-[#0A0E14] text-center px-6 py-3 rounded-lg mt-2" href="contact.html">Hire Me</a>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-24 px-6 md:px-12 w-full max-w-7xl mx-auto z-10">
+<!-- Header Section -->
+<header class="mb-16">
+<div class="font-mono text-primary text-sm mb-4 flex items-center gap-2">
+<span class="text-textSecondary">~/</span>projects<span class="animate-pulse">_</span>
+</div>
+<h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight text-textPrimary">Selected Works</h1>
+<p class="text-textSecondary text-lg max-w-2xl leading-relaxed">
+                A showcase of complex web applications, robust backend systems, and scalable infrastructure projects built to solve real-world problems.
+            </p>
+</header>
+<!-- Filters -->
+<div class="flex flex-wrap gap-4 mb-12">
+<button class="px-5 py-2 rounded-full border border-primary text-primary bg-primary/10 font-medium text-sm transition-all">All Projects</button>
+<button class="px-5 py-2 rounded-full border border-border text-textSecondary hover:border-primary/50 hover:text-textPrimary transition-all bg-surface text-sm">Web Apps</button>
+<button class="px-5 py-2 rounded-full border border-border text-textSecondary hover:border-primary/50 hover:text-textPrimary transition-all bg-surface text-sm">Infrastructure</button>
+<button class="px-5 py-2 rounded-full border border-border text-textSecondary hover:border-primary/50 hover:text-textPrimary transition-all bg-surface text-sm">Open Source</button>
+</div>
+<!-- Projects Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Project Card 1 -->
+<article class="bg-surface rounded-xl border border-border overflow-hidden glow-hover flex flex-col group h-full animate-fade-in-scale [animation-delay:100ms]">
+<div class="relative h-64 overflow-hidden bg-background">
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60 z-10"></div>
+<img class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110" data-alt="A highly detailed UI mockup of a sleek, dark-themed SaaS dashboard for financial analytics. The interface features intricate data visualization charts in vibrant teal and cyan accents against a deep charcoal background. The mockup is presented on a modern monitor in a softly lit, professional workspace, conveying a sense of advanced technology and premium design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBa64oQCydVSynGYxX0FhPk2UGUTplwp7MxQqPH1zms0HsCB8dnS6HwhZG3GDz4GBMw-8FSCA7rSYFKTpigyKgfDD6wQLWN15OuQ-qcpeYBeJxTTwmzv3YNEEjCaGT321Ya26zho4LNzngdu4ZMf-VeMqgK4Fqv0Jku64751Vvj-uPIuWiQHc2shVe0vEBomLYQYi6pN5LEh9OEoR3oWVgh-OARTHs55mLEDiM1JySG7tCR1btVGUtkw"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-4">
+<h2 class="font-headline text-2xl font-bold text-textPrimary">Nexus FinTech Platform</h2>
+<span class="flex items-center gap-1 text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">2023</span>
+</div>
+<p class="text-textSecondary mb-6 flex-grow">
+                        A high-performance trading platform processing millions of transactions daily. Features real-time websocket data streaming and an advanced React-based analytics dashboard.
+                    </p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="text-xs text-textSecondary bg-background border border-border px-3 py-1 rounded-full">React</span>
+<span class="text-xs text-textSecondary bg-background border border-border px-3 py-1 rounded-full">Node.js</span>
+<span class="text-xs text-textSecondary bg-background border border-border px-3 py-1 rounded-full">Kafka</span>
+<span class="text-xs text-textSecondary bg-background border border-border px-3 py-1 rounded-full">AWS</span>
+</div>
+<div class="flex gap-4 border-t border-border pt-4">
+<a class="flex items-center gap-2 text-sm font-medium text-textPrimary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">article</span> View Case Study
+                        </a>
+<a class="flex items-center gap-2 text-sm font-medium text-textPrimary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span> Live Demo
+                        </a>
+</div>
+</div>
+</article>
+<!-- Project Card 2 -->
+<article class="bg-surface rounded-xl border border-border overflow-hidden glow-hover flex flex-col group h-full animate-fade-in-scale [animation-delay:300ms]">
+<div class="relative h-64 overflow-hidden bg-background">
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60 z-10"></div>
+<img class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110" data-alt="A cinematic, angled perspective mockup of a modern e-commerce mobile application interface. The screen displays a minimalist product gallery with a dark mode aesthetic, highlighted by striking teal action buttons and clean typography. The smartphone is floating elegantly against an abstract, dark, subtly glowing background, emphasizing high-end digital design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAjJ1gcQvjeM0mK4m43bl3mMCN8s2r0uRqkZiOb4kaaZgCCLvd3etFysTNvdiNzbKLUxqUtWxyCNThOI4ro20ofJqKhr6_HOHIzMNSExpiszjVLZdWv8cBIObt2BVBIzXT-wO-1AjzEYEubhkHIX4KZa-G9x-uREbCnid34mdR5pU5YjUGpaNZ3n5YDSK2not4_UNceUD9NL2KtRc9R2VK9rV3SApCw4FO3SGvyhk5MUjp9B4jp2A56A"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-4">
+<h2 class="font-headline text-2xl font-bold text-textPrimary">Aura Commerce Engine</h2>
+<span class="flex items-center gap-1 text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">2023</span>
+</div>
+<p class="text-textSecondary mb-6 flex-grow">
+                        A headless e-commerce backend built with a microservices architecture. Designed to handle massive traffic spikes during flash sales with auto-scaling Kubernetes clusters.
+                    </p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="text-xs text-textSecondary bg-background border border-border px-3 py-1 rounded-full">Go</span>
+<span class="text-xs text-textSecondary bg-background border border-border px-3 py-1 rounded-full">gRPC</span>
+<span class="text-xs text-textSecondary bg-background border border-border px-3 py-1 rounded-full">Kubernetes</span>
+<span class="text-xs text-textSecondary bg-background border border-border px-3 py-1 rounded-full">PostgreSQL</span>
+</div>
+<div class="flex gap-4 border-t border-border pt-4">
+<a class="flex items-center gap-2 text-sm font-medium text-textPrimary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">article</span> View Case Study
+                        </a>
+<a class="flex items-center gap-2 text-sm font-medium text-textPrimary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">code</span> GitHub Repo
+                        </a>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0A0E14] w-full py-12 border-t border-[#1E293B]">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-6">
+<div class="font-headline font-bold text-[#F8FAFC]">
+                Eng Said Abdihakim
+            </div>
+<div class="flex gap-6 font-body text-xs text-[#94A3B8]">
+<a class="hover:text-[#2DD4BF] transition-colors opacity-80 hover:opacity-100 text-[#94A3B8]" href="#">GitHub</a>
+<a class="hover:text-[#2DD4BF] transition-colors opacity-80 hover:opacity-100 text-[#94A3B8]" href="#">LinkedIn</a>
+<a class="hover:text-[#2DD4BF] transition-colors opacity-80 hover:opacity-100 text-[#94A3B8]" href="#">Twitter</a>
+<a class="hover:text-[#2DD4BF] transition-colors opacity-80 hover:opacity-100 text-[#94A3B8]" href="#">Email</a>
+</div>
+<div class="font-body text-xs text-[#94A3B8]">
+                © 2026 Eng Said Abdihakim. Built with precision.
+            </div>
+</div>
+</footer>
+</body></html>

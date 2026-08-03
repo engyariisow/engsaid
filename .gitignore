@@ -1,0 +1,10 @@
+# Secrets
+opencode.json
+
+# Internal tooling / state
+.opencode/
+.stitch/
+
+# OS files
+Thumbs.db
+.DS_Store

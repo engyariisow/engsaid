@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Skills &amp; Services - Eng Said Abdihakim</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined', sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0E14;
+            color: #F8FAFC;
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .font-mono-accent {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Glow effects */
+        .glow-hover:hover {
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.2);
+            border-color: rgba(45, 212, 191, 0.5);
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(45, 212, 191, 0.3);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes slideRight {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        .animate-fill-bar {
+            transform-origin: left;
+            animation: slideRight 1s ease-out forwards;
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#0A0E14',
+                        surface: '#11161F',
+                        primary: '#2DD4BF',
+                        secondary: '#38BDF8',
+                        text: {
+                            primary: '#F8FAFC',
+                            secondary: '#94A3B8'
+                        },
+                        border: '#1E293B'
+                    },
+                    fontFamily: {
+                        headline: ["Space Grotesk", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-text-primary antialiased flex flex-col min-h-screen overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0A0E14]/80 backdrop-blur-md border-b border-[#1E293B] shadow-2xl shadow-cyan-900/10 transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<a class="text-xl font-headline font-bold text-[#F8FAFC] tracking-tighter hover:text-[#2DD4BF] transition-colors" href="index.html">
+                Said.dev
+            </a>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors font-headline text-sm uppercase tracking-widest hover:text-[#2DD4BF]" href="index.html">Home</a>
+<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors font-headline text-sm uppercase tracking-widest hover:text-[#2DD4BF]" href="about.html">About</a>
+<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors font-headline text-sm uppercase tracking-widest hover:text-[#2DD4BF]" href="projects.html">Projects</a>
+<a class="text-[#2DD4BF] border-b-2 border-[#2DD4BF] pb-1 font-headline text-sm uppercase tracking-widest" href="skills.html">Skills</a>
+<a class="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors font-headline text-sm uppercase tracking-widest hover:text-[#2DD4BF]" href="contact.html">Contact</a>
+</div>
+<!-- Primary Action -->
+<a class="hidden md:block bg-primary text-background px-6 py-2 rounded-lg font-medium text-sm hover:bg-opacity-90 transition-all active:scale-95 shadow-[0_0_15px_rgba(45,212,191,0.3)]" href="contact.html">
+                Hire Me
+            </a>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-text-secondary hover:text-text-primary" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Toggle menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="hidden md:hidden bg-[#0A0E14]/95 backdrop-blur-md border-b border-[#1E293B]" id="mobile-menu">
+<div class="px-6 py-4 flex flex-col gap-4 font-headline text-sm font-bold uppercase tracking-wider">
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="index.html">Home</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="about.html">About</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="projects.html">Projects</a>
+<a class="text-[#2DD4BF]" href="skills.html">Skills</a>
+<a class="text-[#94A3B8] hover:text-[#2DD4BF]" href="contact.html">Contact</a>
+<a class="bg-[#2DD4BF] text-[#0A0E14] text-center px-6 py-3 rounded-lg mt-2" href="contact.html">Hire Me</a>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto w-full relative">
+<!-- Background Orbs -->
+<div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+<div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+<!-- Page Header -->
+<header class="mb-20 text-center md:text-left">
+<h1 class="text-4xl sm:text-5xl md:text-6xl font-headline font-bold mb-6 tracking-tight">
+                Technical <span class="text-primary text-glow">Arsenal</span>
+</h1>
+<p class="text-text-secondary text-lg max-w-2xl leading-relaxed">
+                A comprehensive overview of my technical proficiencies, specialized services, and professional certifications acquired through years of engineering complex systems.
+            </p>
+</header>
+<!-- Technical Stack Grid -->
+<section class="mb-32">
+<div class="flex items-center gap-4 mb-12">
+<span class="material-symbols-outlined text-primary text-3xl">terminal</span>
+<h2 class="text-3xl font-headline font-bold">Tech Stack</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Frontend Card -->
+<div class="bg-surface rounded-xl p-8 border border-border glow-hover transition-all duration-300 relative overflow-hidden group animate-fade-in-up">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary">web</span>
+<h3 class="text-xl font-headline font-bold">Frontend Ecosystem</h3>
+</div>
+<ul class="space-y-4">
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>React / Next.js</span>
+<span class="text-primary">95%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 95%"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>TypeScript</span>
+<span class="text-primary">90%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 90%"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>Tailwind CSS</span>
+<span class="text-primary">98%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 98%"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>Vue.js</span>
+<span class="text-primary">80%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 80%"></div>
+</div>
+</li>
+</ul>
+</div>
+<!-- Backend Card -->
+<div class="bg-surface rounded-xl p-8 border border-border glow-hover transition-all duration-300 relative overflow-hidden group animate-fade-in-up delay-100">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary">database</span>
+<h3 class="text-xl font-headline font-bold">Backend Architecture</h3>
+</div>
+<ul class="space-y-4">
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>Node.js / Express</span>
+<span class="text-primary">92%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 92%"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>Python / Django</span>
+<span class="text-primary">85%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 85%"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>PostgreSQL</span>
+<span class="text-primary">88%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 88%"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>GraphQL / REST</span>
+<span class="text-primary">90%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 90%"></div>
+</div>
+</li>
+</ul>
+</div>
+<!-- Infrastructure Card -->
+<div class="bg-surface rounded-xl p-8 border border-border glow-hover transition-all duration-300 relative overflow-hidden group animate-fade-in-up delay-200">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary">cloud</span>
+<h3 class="text-xl font-headline font-bold">Cloud &amp; DevOps</h3>
+</div>
+<ul class="space-y-4">
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>AWS Services</span>
+<span class="text-primary">85%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 85%"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>Docker / K8s</span>
+<span class="text-primary">80%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 80%"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>CI/CD Pipelines</span>
+<span class="text-primary">88%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 88%"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between mb-1 font-mono-accent text-sm text-text-secondary">
+<span>Linux Admin</span>
+<span class="text-primary">75%</span>
+</div>
+<div class="w-full bg-background rounded-full h-1.5 border border-border">
+<div class="bg-primary h-1.5 rounded-full animate-fill-bar" style="width: 75%"></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="mb-32 relative">
+<div class="absolute -left-20 top-20 w-64 h-64 border border-primary/20 rounded-full blur-[2px] opacity-30 pointer-events-none hidden md:block"></div>
+<div class="flex items-center gap-4 mb-12">
+<span class="material-symbols-outlined text-primary text-3xl">design_services</span>
+<h2 class="text-3xl font-headline font-bold">Specialized Services</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Service 1 -->
+<div class="bg-gradient-to-br from-surface to-background border border-border rounded-xl p-8 flex flex-col justify-between group hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(45,212,191,0.1)] animate-fade-in-up">
+<div>
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-4 group-hover:text-primary transition-colors">Cloud Architecture</h3>
+<p class="text-text-secondary leading-relaxed mb-6">
+                            Designing scalable, highly available, and fault-tolerant cloud infrastructures on AWS. Specializing in serverless architectures, microservices migration, and cost optimization strategies for enterprise applications.
+                        </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface border border-border rounded-full text-xs font-mono-accent text-text-secondary">AWS</span>
+<span class="px-3 py-1 bg-surface border border-border rounded-full text-xs font-mono-accent text-text-secondary">Serverless</span>
+<span class="px-3 py-1 bg-surface border border-border rounded-full text-xs font-mono-accent text-text-secondary">Terraform</span>
+</div>
+</div>
+<!-- Service 2 -->
+<div class="bg-gradient-to-br from-surface to-background border border-border rounded-xl p-8 flex flex-col justify-between group hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(45,212,191,0.1)] animate-fade-in-up delay-100">
+<div>
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">code_blocks</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-4 group-hover:text-primary transition-colors">Full-Stack Development</h3>
+<p class="text-text-secondary leading-relaxed mb-6">
+                            End-to-end application development bridging elegant, responsive frontends with robust, secure backends. Focus on modern frameworks, performance metrics, and clean, maintainable codebases.
+                        </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface border border-border rounded-full text-xs font-mono-accent text-text-secondary">Next.js</span>
+<span class="px-3 py-1 bg-surface border border-border rounded-full text-xs font-mono-accent text-text-secondary">Node.js</span>
+<span class="px-3 py-1 bg-surface border border-border rounded-full text-xs font-mono-accent text-text-secondary">PostgreSQL</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Certifications Section -->
+<section>
+<div class="flex items-center gap-4 mb-12">
+<span class="material-symbols-outlined text-primary text-3xl">workspace_premium</span>
+<h2 class="text-3xl font-headline font-bold">Certifications &amp; Badges</h2>
+</div>
+<div class="flex flex-wrap gap-6 justify-center md:justify-start">
+<!-- Badge 1 -->
+<div class="bg-surface border border-border rounded-xl p-6 flex items-center gap-6 w-full md:w-auto hover:bg-surface/80 transition-colors">
+<div class="w-16 h-16 rounded bg-background border border-border flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-3xl">cloud_done</span>
+</div>
+<div>
+<h4 class="font-bold font-headline text-lg">AWS Certified</h4>
+<p class="text-sm text-text-secondary font-mono-accent mt-1">Solutions Architect - Associate</p>
+</div>
+</div>
+<!-- Badge 2 -->
+<div class="bg-surface border border-border rounded-xl p-6 flex items-center gap-6 w-full md:w-auto hover:bg-surface/80 transition-colors">
+<div class="w-16 h-16 rounded bg-background border border-border flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-3xl">verified</span>
+</div>
+<div>
+<h4 class="font-bold font-headline text-lg">Meta Front-End Developer</h4>
+<p class="text-sm text-text-secondary font-mono-accent mt-1">Professional Certificate</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-[#0A0E14] border-t border-[#1E293B] mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-6">
+<span class="font-headline font-bold text-[#F8FAFC]">Eng Said Abdihakim</span>
+<p class="font-body text-xs text-[#94A3B8]">
+                © 2026 Eng Said Abdihakim. Built with precision.
+            </p>
+<div class="flex gap-6">
+<a class="font-body text-xs text-[#94A3B8] opacity-80 hover:opacity-100 hover:text-[#2DD4BF] transition-colors" href="#">GitHub</a>
+<a class="font-body text-xs text-[#94A3B8] opacity-80 hover:opacity-100 hover:text-[#2DD4BF] transition-colors" href="#">LinkedIn</a>
+<a class="font-body text-xs text-[#94A3B8] opacity-80 hover:opacity-100 hover:text-[#2DD4BF] transition-colors" href="#">Twitter</a>
+<a class="font-body text-xs text-[#94A3B8] opacity-80 hover:opacity-100 hover:text-[#2DD4BF] transition-colors" href="#">Email</a>
+</div>
+</div>
+</footer>
+</body></html>
