@@ -189,7 +189,12 @@ void main() {
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-[#0A0E14]/80 backdrop-blur-md border-b border-[#1E293B] shadow-sm transition-all duration-300">
 <div class="max-w-[1100px] mx-auto flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-2 md:gap-0">
 <a class="text-xl font-headline font-bold text-[#F8FAFC] hover:scale-105 hover:text-[#2DD4BF] transition-all duration-300 truncate min-w-0" href="index.html">Eng Said Abdihakim</a>
+<button class="md:hidden text-[#F8FAFC] p-2 shrink-0" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Toggle menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
 <!-- Desktop Nav -->
 <div class="hidden md:flex items-center gap-8 font-headline text-sm font-bold uppercase tracking-wider">
 <a class="text-[#2DD4BF] border-b-2 border-[#2DD4BF] pb-1 hover:scale-105 transition-all duration-300" href="index.html">Home</a>
@@ -201,9 +206,6 @@ void main() {
 <a class="hidden md:inline-block bg-[#2DD4BF] text-[#0A0E14] px-6 py-2 rounded-lg font-headline font-bold text-xs uppercase tracking-widest active:scale-95 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(45,212,191,0.5)]" href="contact.html">
         Hire Me
       </a>
-<button class="md:hidden text-[#F8FAFC] p-2 shrink-0" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Toggle menu">
-<span class="material-symbols-outlined">menu</span>
-</button>
 </div>
 <div class="hidden md:hidden bg-[#0A0E14]/95 backdrop-blur-md border-b border-[#1E293B]" id="mobile-menu">
 <div class="px-6 py-4 flex flex-col gap-4 font-headline text-sm font-bold uppercase tracking-wider">
